@@ -34,7 +34,7 @@ export default {
               this.$Modal.info({
                 content: "登录过期,请重新登录!",
               });
-              this.$store.commit("logout");
+              this.$store.commit("logOut");
               this.$router.push({ name: "login" });
             }
           }

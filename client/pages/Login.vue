@@ -1,28 +1,28 @@
 <template>
-  <div id="login">
-    <div class="login-panel">
-      <div class="lgn-title">
-        <h1>登录</h1>
-        <p>新用户<a href="/register">注册</a></p>
-      </div>
-      <div class="lgn-input">
-        <at-input v-model="email" placeholder="邮箱" size="large"></at-input>
-        <at-input
-          v-model="password"
-          type="password"
-          placeholder="密码"
-          size="large"
-          :maxlength="12"
-          :minlength="6"
-          @keyup.enter.native="login"
-        ></at-input>
-      </div>
-      <h3><a href="">忘记密码?</a></h3>
-      <div class="lgn-btn">
-        <at-button type="primary" size="large" @click="login">登录</at-button>
-      </div>
-    </div>
-  </div>
+	<div id="login">
+		<div class="login-panel">
+			<div class="lgn-title">
+				<h1>登录</h1>
+				<p>新用户<a href="/register">注册</a></p>
+			</div>
+			<div class="lgn-input">
+				<at-input v-model="email" placeholder="邮箱" size="large"></at-input>
+				<at-input
+					v-model="password"
+					type="password"
+					placeholder="密码"
+					size="large"
+					:maxlength="12"
+					:minlength="6"
+					@keyup.enter.native="login"
+				></at-input>
+			</div>
+			<h3><a href="">忘记密码?</a></h3>
+			<div class="lgn-btn">
+				<at-button type="primary" size="large" @click="login">登录</at-button>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script lang="typescript">
@@ -52,11 +52,13 @@ export default {
                     password: this.password
                 }).then(res => {
                     if(res.data.success) {
-                        this.$Message.success(res.data.msg);
-                        // 存储用户信息
-                        this.$store.commit('setUser', { user: res.data.user });
-                        this.$store.commit('setToken', { token: res.data.token });
-                        this.$router.push({ name: 'home' });
+                        this.$Message.success(res.data.msg, ()=>{
+                            // 存储用户信息
+                            this.$store.commit('setUser', { user: res.data.user });
+                            this.$store.commit('setToken', { token: res.data.token });
+                            this.$router.push({ name: 'home' });
+                        });
+
                     } else {
                         this.$Message.warning(res.data.msg);
                     }
@@ -64,7 +66,7 @@ export default {
                     console.error(err);
                 })
             } else {
-                this.$Message.error('输入信息不完整!');
+                this.$Message.error('用户邮箱或者密码输入为空!');
             }
         }
     }

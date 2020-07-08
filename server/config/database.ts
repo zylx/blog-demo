@@ -1,5 +1,5 @@
 module.exports = {
-  dbName: "test",
+  dbName: "blog",
   host: "localhost",
   port: 3306,
   user: "root",

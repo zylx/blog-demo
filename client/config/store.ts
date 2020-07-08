@@ -23,6 +23,7 @@ export default () => {
         localStorage.setItem("token", JSON.stringify(params.token));
       },
       logOut(state) {
+        console.log("logOut -> state", state)
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         state.user = null;

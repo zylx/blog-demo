@@ -1,4 +1,6 @@
-const { resolve } = require('path');
+const {
+  resolve
+} = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackBaseConf = require('./webpack.base.conf.js');
@@ -36,16 +38,16 @@ module.exports = merge(webpackBaseConf, {
       poll: 1000
     },
     // 配置解决跨域问题
-    // proxy: {
-    //     '/api': {
-    //         target: 'http://127.0.0.1:80/youbeng',
-    //         pathRewrite: {
-    //             '^/api': '' //路径重写
-    //         },
-    //         changeOrigin: true, //设置为true，那么本地会虚拟一个服务端接收你的请求并代你发送该请求，这样就不会有跨域问题了，当然这只适用于开发环境
-    //         secure: false, //不检查安全问题
-    //     }
-    // }
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8001',
+        pathRewrite: {
+          '^/api': '' // 路径重写
+        },
+        changeOrigin: true, // 设置为true，那么本地会虚拟一个服务端接收你的请求并代你发送该请求，这样就不会有跨域问题了，当然这只适用于开发环境
+        secure: false, // 不检查安全问题
+      }
+    }
   },
   devtool: 'cheap-module-eval-source-map'
 });

@@ -98,7 +98,7 @@ export default {
       this.$router.push({ name: "userCenter" });
     },
     logout() {
-      if (confirm("确定退出吗？")) this.$store.commit("logout");
+      if (confirm("确定退出吗？")) this.$store.commit("logOut");
       this.$router.push({ name: "home" });
     },
   },

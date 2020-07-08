@@ -68,7 +68,7 @@ export default {
                     return false;
                 }
                 if(this.password.length < 6 || this.password.length > 12) {
-                    this.$Message.error('密码长度超出指定范围!');
+                    this.$Message.error('密码长度超出指定范围[6,12]!');
                     return false;
                 }
                 this.axios.post('/users/register', {
@@ -86,7 +86,7 @@ export default {
                     console.error(err);
                 })
             } else {
-                this.$Message.error('输入信息不完整!');
+                this.$Message.error('注册信息不完整!');
             }
         }
     }
