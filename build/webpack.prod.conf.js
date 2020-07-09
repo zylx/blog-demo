@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 // const webpack = require('webpack');
 const HardSourcePlugin = require('hard-source-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpackBaseConf = require('./webpack.base.conf');
 
@@ -38,6 +39,10 @@ module.exports = merge(webpackBaseConf, {
     new CleanWebpackPlugin(),
     new HardSourcePlugin(), // 更好的代替者DLL选择hard-source-webpack-plugin
     new OptimizeCssAssetsPlugin(), // 压缩CSS
+    new CompressionWebpackPlugin({ // 开启GZIP压缩
+      test: /\.(js|css)$/,
+      threshold: 10240 // 这里对大于10k的js和css文件进行压缩
+    })
   ],
   devtool: 'cheap-module-source-map'
 });

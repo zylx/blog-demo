@@ -2,7 +2,6 @@ const { resolve } = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -102,11 +101,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash:8].css',
       chunkFilename: 'css/[id].[hash:8].css'
-    }),
-    // new CompressionWebpackPlugin({ // 开启GZIP压缩
-    //   test: /\.(js|css)$/,
-    //   threshold: 10240 // 这里对大于10k的js和css文件进行压缩
-    // })
+    })
   ],
   resolve: {
     // 使用绝对路径指明第三方模块存放的位置，以减少搜索步骤
