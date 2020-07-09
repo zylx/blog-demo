@@ -111,8 +111,8 @@ export default {
 
 <style lang="stylus">
 #header
+    width 1180px;
     height 45px;
-    background-color #fff;
     display flex;
     .link-wrapper
         flex 20;

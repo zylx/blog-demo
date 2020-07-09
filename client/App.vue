@@ -30,11 +30,19 @@ export default {
 </script>
 
 <style lang="stylus">
+html,
+body
+  margin 0;
+  padding 0;
+  background-color #f4f5f5;
 #app
     header
-        width 1180px;
+        display flex;
+        justify-content center;
+        align-items center;
         margin 0 auto;
-        border-bottom 1px soild #f1f1f1;
+        border-bottom 1px solid #f1f1f1;
+        background-color #fff;
     main
         background-color #f4f5f5;
         padding 10px;
