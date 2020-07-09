@@ -90,7 +90,7 @@ export default {
     methods: {
         getBlog() {
             this.axios.get('/blogs/id/' + this.blog_id).then(res => {
-                this.blog = res.data[0];
+                this.blog = res[0];
                 this.getAuthor();
                 this.getBlogComments();
             }, err => {
@@ -99,7 +99,7 @@ export default {
         },
         getAuthor() {
             this.axios.get('/users/info/' + this.blog.email).then(res => {
-                let user = res.data[0];
+                let user = res[0];
                 this.avatar = user.avatar;
                 this.username = user.username;
                 this.author = user;
@@ -156,7 +156,7 @@ export default {
         // 获取评论
         getBlogComments() {
             this.axios.get('/blogs/comments/' + this.blog.blog_id).then(res => {
-                this.commentList = res.data;
+                this.commentList = res;
             }, err => {
                 console.error(err);
             })

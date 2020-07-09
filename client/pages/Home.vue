@@ -6,6 +6,7 @@
       </div>
     </div>
     <at-pagination
+      v-if="blogList.length"
       :total="page.total"
       :current="page.currentPage"
       :page-size="page.pageSize"
@@ -24,8 +25,8 @@ export default {
       page: {
         total: 0,
         pageSize: 6,
-        currentPage: 1,
-      },
+        currentPage: 1
+      }
     };
   },
   created() {
@@ -33,7 +34,7 @@ export default {
   },
   components: {
     "blog-card": () => import("@/components/Card.vue"),
-    "at-pagitation": Pagination,
+    "at-pagitation": Pagination
   },
   methods: {
     getBlogs() {
@@ -41,14 +42,14 @@ export default {
         .get("/blogs/list", {
           params: {
             pageSize: this.page.pageSize,
-            currentPage: this.page.currentPage,
-          },
+            currentPage: this.page.currentPage
+          }
         })
         .then(
           (res) => {
-            this.page.pageSize = res.page.pageSize;
-            this.page.currentPage = res.page.currentPage;
-            this.pageChange(this.page.currentPage);
+          console.log("getBlogs -> res", res)
+            // this.pageChange(this.page.currentPage);
+            this.blogList = res.blogList;
           },
           (err) => {
             console.log(err);
@@ -56,24 +57,24 @@ export default {
         );
     },
     pageChange(currentPage) {
-      this.page.currentPage = currentPage;
-      this.axios
-        .get("/blogs/list", {
-          params: {
-            pageSize: this.page.pageSize,
-            currentPage: this.page.currentPage,
-          },
-        })
-        .then(
-          (res) => {
-            this.blogList = res.data.blogList;
-          },
-          (err) => {
-            console.error(err);
-          }
-        );
-    },
-  },
+      // this.page.currentPage = currentPage;
+      // this.axios
+      //   .get("/blogs/list", {
+      //     params: {
+      //       pageSize: this.page.pageSize,
+      //       currentPage: this.page.currentPage
+      //     }
+      //   })
+      //   .then(
+      //     (res) => {
+      //       this.blogList = res.blogList;
+      //     },
+      //     (err) => {
+      //       console.error(err);
+      //     }
+      //   );
+    }
+  }
 };
 </script>
 

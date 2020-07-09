@@ -31,7 +31,7 @@ export default {
         },
         getAuthor() {
             this.axios.get('/users/info/' + this.blog.email).then(res => {
-                let user = res.data[0];
+                let user = res[0];
                 this.username = user.username;
             }, err => {
                 console.error(err);

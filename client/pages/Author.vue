@@ -52,7 +52,7 @@ export default {
     methods: {
         getAuthor() {
             this.axios.get('/users/info/' + this.email).then(res => {
-                this.author = res.data[0];
+                this.author = res[0];
                 this.avatar = this.author.avatar;
                 this.getAuthorBlogs();
                 this.isFollowTheAuthor();
@@ -69,7 +69,7 @@ export default {
         // 获取该博主博文
         getAuthorBlogs() {
             this.axios.get('/blogs/email/' + this.email).then(res => {
-                this.blogList = res.data;
+                this.blogList = res;
             }, err => {
                 console.error(err);
             })
@@ -80,7 +80,7 @@ export default {
                 user_email: this.$store.getters.getUser.email,
                 follow_email: this.email
             }).then(res => {
-                this.isFollow = res.data.isFollow;
+                this.isFollow = res.isFollow;
             }, err => {
                 if(err.code === -1) {  // token鉴权失败
                     this.$Modal.info({

@@ -25,7 +25,7 @@ export default {
         .get("/users/follower" + this.$store.getters.getUser.email)
         .then(
           (res) => {
-            this.follwoerList = res.data;
+            this.follwoerList = res;
             this.getFollowerBlogs();
           },
           (err) => {
@@ -50,7 +50,7 @@ export default {
       this.axios.all(promiseAll).then((resArr) => {
         resArr.forEach(
           (res) => {
-            this.blogList = this.blogList.concat(res.data);
+            this.blogList = this.blogList.concat(res);
           },
           (err) => {
             console.log(err);

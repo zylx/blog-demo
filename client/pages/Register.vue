@@ -76,11 +76,11 @@ export default {
                     email: this.email,
                     password: this.password
                 }).then(res => {
-                    if(res.data.success) {
+                    if(res.success) {
                         this.$router.push({ name: 'login' });
                         this.$Message.success('注册成功!');
                     } else {
-                        this.$Message.warning(res.data.msg);
+                        this.$Message.warning(res.msg);
                     }
                 }, err => {
                     console.error(err);

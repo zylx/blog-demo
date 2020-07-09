@@ -22,7 +22,7 @@ export default {
     methods: {
         getBlogs() {
             this.axios.get('/blogs/sort/' + 3).then(res => {
-                this.blogList = res.data;
+                this.blogList = res;
             }, err => {
                 console.error(err);
             })

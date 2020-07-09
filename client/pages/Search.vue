@@ -31,7 +31,7 @@ export default {
     methods: {
         searchBlogs(searchValue) {
             this.axios.get('/blogs/search/' + searchValue).then(res => {
-                this.blogList = res.data;
+                this.blogList = res;
             }, err => {
                 console.error(err);
             });

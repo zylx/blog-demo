@@ -98,7 +98,7 @@ export default {
         // 获取文章类型
         getAllSorts() {
             this.axios.get('/blogs/sort').then(res => {
-                this.sorts = res.data;
+                this.sorts = res;
             }, err => {
                 console.error(err);
             });
@@ -126,7 +126,7 @@ export default {
                     email: email,
                 };
                 this.axios.post('/blogs/new', blogFrom).then(res => {
-                    let blog_id = res.data.blog_id;
+                    let blog_id = res.blog_id;
                     this.$router.push({
                         name: 'blog',
                         query: { blog_id: this.$Base64.encode(blog_id) }
@@ -179,7 +179,7 @@ export default {
         // 获取用户的所有博客
         getUserBlog(blog_id) {
             this.axios.get('/blogs/id/' + blog_id).then(res => {
-                let blog = res.data[0];
+                let blog = res[0];
                 this.inputTitle = blog.title;
                 this.editor.txt.html(blog.content);
                 this.sorts.forEach(element => {

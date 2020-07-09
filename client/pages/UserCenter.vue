@@ -137,7 +137,7 @@ export default {
         getUser() {
             this.followerList = this.fanList = [];
             this.axios.get('/users/info/' + this.$store.getters.getUser.email).then(res => {
-                let user = res.data[0];
+                let user = res[0];
                 this.username = user.username;
                 // 存储用户信息
                 this.$store.commit('setUser', { user: user });
@@ -160,7 +160,7 @@ export default {
         // 获取自己的博客
         getOwnBlogs() {
             this.axios.get('/blogs/email/' + this.$store.getters.getUser.email).then(res => {
-                this.blogList = res.data;
+                this.blogList = res;
             }, err => {
                 console.error(err);
             })
@@ -168,7 +168,7 @@ export default {
         // 获取关注者
         getFollowers() {
             this.axios.get('/users/follow/' + this.$store.getters.getUser.email).then(res => {
-                let followerList = res.data;
+                let followerList = res;
                 this.getFollowersInfo(followerList);
             }, err => {  // 未开放接口必须对401处理
                 if(err.code === -1) {  // token鉴权失败
@@ -189,7 +189,7 @@ export default {
             // 再处理所有回调结果
             this.axios.all(promiseAll).then(resArr => {
                 resArr.forEach(res => {
-                    this.followerList = this.followerList.concat(res.data);
+                    this.followerList = this.followerList.concat(res);
                 });
             }, err => {
                 console.error(err);
@@ -198,7 +198,7 @@ export default {
         // 获取粉丝
         getFans() {
             this.axios.get('/users/unfollow/' + this.$store.getters.getUser.email).then(res => {
-                let fanList = res.data;
+                let fanList = res;
                 this.getFansInfo(fanList);
             }, err => {
                 if(err.code === -1) {  // token鉴权失败
@@ -219,7 +219,7 @@ export default {
             // 再处理所有回调结果
             this.axios.all(promiseAll).then(resArr => {
                 resArr.forEach(res => {
-                    this.fanList = this.fanList.concat(res.data);
+                    this.fanList = this.fanList.concat(res);
                 });
             }, err => {
                 console.error(err);
