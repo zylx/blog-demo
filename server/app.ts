@@ -8,12 +8,14 @@ const router = require("./config/router.ts");
 // 创建一个Koa对象表示web app本身:
 const app = new Koa();
 
-// 对于任何请求，app将调用该异步函数处理请求：
+// token 验证失败的时候会抛出401错误，因此需要添加错误处理，而且要放在 app.use(koajwt()) 之前，否则不执行
 app.use(async (ctx, next) => {
 	await next().catch((err) => {
 		if (err.status === 401) {
 			ctx.status = 401;
-			ctx.body = "Protected resource, use Authorization header to get access\n";
+			// ctx.body = ctx.res.body = ctx.response.body
+			// ctx.body = "Protected resource, use Authorization header to get access\n";
+			ctx.body = ctx.response;
 		} else {
 			throw err;
 		}
@@ -36,15 +38,18 @@ app.use(
 			/^\/blogs\/email/,
 			/^\/blogs\/search/,
 			/^\/blogs\/comments/,
-			/^\//
+			/^\/$/,
+			// /^((?!\/api).)*$/   // 设置除了私有接口外的其它资源，可以不需要认证访问
 		]
 	})
 );
 
+// 加载路由中间件
 router(app);
 
 //配置post bodyparser的中间件
 app.use(bodyParser());
+
 app.use(koaStatic(path.join(__dirname, "./public/dist")));
 
 // 在端口8001监听:
